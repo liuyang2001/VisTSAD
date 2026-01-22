@@ -673,13 +673,10 @@ def process_file_one_setting(
 def parse_args():
     ap = argparse.ArgumentParser(prog="main.py")
 
-    ap.add_argument("--EU1", type=float, default=0.00, help="EU lower threshold (default: 0.50)")
-    ap.add_argument("--EU2", type=float, default=1.00, help="EU upper threshold (default: 0.55)")
-    ap.add_argument("--MI1", type=float, default=0.00, help="MI lower threshold (default: 0.80)")
-    ap.add_argument("--MI2", type=float, default=1.00, help="MI upper threshold (default: 0.85)")
-
-    ap.add_argument("--GRAY1", type=float, default=0.25, help="GRAY lower threshold (default: 0.30)")
-    ap.add_argument("--GRAY2", type=float, default=0.30, help="GRAY upper threshold (default: 0.50)")
+    ap.add_argument("--EU1", type=float, default=0.45)
+    ap.add_argument("--EU2", type=float, default=0.50)
+    ap.add_argument("--MI1", type=float, default=0.75)
+    ap.add_argument("--MI2", type=float, default=0.80)
 
     ap.add_argument("--run_gray_plus_rel", type=int, default=0, choices=[0, 1])
     # ap.add_argument("--run_rel_only", type=int, default=0, choices=[0, 1])
