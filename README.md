@@ -24,8 +24,8 @@ pip install -r requirement.txt
 **Step 2: Dataset Preparation**
 
 Place the dataset files into the corresponding folders:
-   SKAB: The .csv files are already included in data/dataset/SKAB/. You can directly proceed to evaluation.
-   ATSADBench: Access to this data is subject to confidentiality arrangements. Once obtained, please place the corresponding .xlsx files into data/dataset/ATSADBench/.
+- SKAB: The .csv files are already included in data/dataset/SKAB/. You can directly proceed to evaluation.
+- ATSADBench: Access to this data is subject to confidentiality arrangements. Once obtained, please place the corresponding .xlsx files into data/dataset/ATSADBench/.
 
 **Step 3: Configuration**
 
