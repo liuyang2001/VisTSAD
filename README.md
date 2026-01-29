@@ -112,5 +112,5 @@ python tools/run_sensitivity_atsad.py
 **Step 2: Check Results**
 
 The summary reports will be saved directly to:
-   results_skab/sensitivity/FINAL_SUMMARY_SKAB.xlsx
-   results_atsad/sensitivity/FINAL_SUMMARY.xlsx
+- results_skab/sensitivity/FINAL_SUMMARY_SKAB.xlsx
+- results_atsad/sensitivity/FINAL_SUMMARY.xlsx
