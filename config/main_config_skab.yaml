@@ -1,0 +1,32 @@
+project:
+  name: "SKAB_Anomaly_Detection"
+
+experiment:
+  mode: "all" # all, eu_only, mi_only, value_only, no_residual
+  window_size: 64
+  stride: 64
+  num_vars: 8
+  
+  target_files: 
+    -  "1.csv" 
+    -  "3.csv" 
+    -  "8.csv" 
+    -  "other-2.csv" 
+    -  "other-5.csv" 
+    -  "other-6.csv" 
+    -  "other-7.csv" 
+    -  "other-9.csv" 
+    -  "other-10.csv" 
+    -  "other-12.csv"  
+    -  "other-14.csv"
+
+paths:
+  dataset: "data/dataset/SKAB"
+  resources: "data/resources_skab/train_ref_lib.pkl"
+  dataset_params: "config/skab/dataset_params_all.json"
+  output_dir: "results_skab" 
+
+model:
+  api_key: ""
+  base_url: "https://generativelanguage.googleapis.com/v1beta/openai/"
+  model_name: "gemini-3-pro-preview"

@@ -1,5 +1,17 @@
 # VisTASD Project
 
+## 0. Project Directory
+
+```text
+├── config/                 # Configuration files
+├── dataset/                # Dataset directory (SKAB & ATSADBench)
+├── src/                    # Core source code
+├── tools/                  # Initialization & Sensitivity scripts
+├── main.py                 # Main entry point for inference
+├── eval_metrics.py         # Evaluation script
+└── requirements.txt
+```
+
 ## 1. Setup and Preparation
 
 **Step 1: Install Dependencies**
@@ -11,20 +23,26 @@ pip install -r requirement.txt
 
 **Step 2: Dataset Preparation**
 
-Place the corresponding dataset files into the dataset folder. 
+Place the dataset files into the corresponding folders:
+   SKAB: The .csv files are already included in data/dataset/SKAB/. You can directly proceed to evaluation.
+   ATSADBench: Access to this data is subject to confidentiality arrangements. Once obtained, please place the corresponding .xlsx files into data/dataset/ATSADBench/.
 
 **Step 3: Configuration**
 
-Open `config.py` and fill in the following parameters:
-- `MODEL_NAME`
-- `API_KEY`
-- `BASE_URL`
+Open config/main_config_skab.yaml and config/main_config_atsad.yaml, and fill in your API Key:
+- `model_name`
+- `api_key`
+- `base_url`
 
-**Step 4: Generate Graphs**
+**Step 4: Build Reference Libraries**
 
-Run the image generation script to obtain the corresponding graphs:
+Run the initialization scripts to build the reference normal window set:
 ```bash
-python generate_images.py
+# For SKAB
+python tools/build_skab_lib.py
+
+# For ATSADBench
+python tools/build_atsad_lib.py
 ```
 
 ---
@@ -33,63 +51,66 @@ python generate_images.py
 
 **Step 1: Run Main Script**
 
-Run `main.py` to generate the results:
+Run the inference using the standard mode (all views):
 ```bash
-python main.py
+# For SKAB
+python main.py --config config/main_config_skab.yaml --mode all
+
+# For ATSADBench
+python main.py --config config/main_config_atsad.yaml --mode all
 ```
 
 **Step 2: Get Metrics**
 
-Run `metrics.py` to obtain statistical indicators:
+Run the evaluation script to obtain statistical indicators:
 ```bash
-python metrics.py
+# For SKAB
+python eval_metrics.py --config config/main_config_skab.yaml --mode all
+
+# For ATSADBench
+python eval_metrics.py --config config/main_config_atsad.yaml --mode all
 ```
 
 ---
 
 ## 3. Ablation Studies
 
-**Step 1: Modify Configuration**
+**Step 1: Run Main Script with Different Modes**
 
-Open `config.py` and adjust the settings:
-1. Set `run_all = 0`.
-2. Set the target ablation experiment flag to `1`. Select one of the following:
-   - `run_NoVarCorr`
-   - `run_NoGeoDis`
-   - `run_NoTimefeat`
-   - `run_NoResGraph`
+Select one of the following modes: eu_only(NoVarCorr), mi_only(NoGeoDis), value_only(NoTimefeat), or no_residual(NoResGraph).
 
-**Step 2: Run Main Script**
-
-Run `main.py` to generate the results for the selected ablation study:
 ```bash
-python main.py
+# Example: Running No-Residual mode on SKAB
+python main.py --config config/main_config_skab.yaml --mode no_residual
+
+# Example: Running EU-Only mode on ATSADBench
+python main.py --config config/main_config_atsad.yaml --mode eu_only
 ```
 
-**Step 3: Get Metrics**
+**Step 2: Get Metrics**
 
-Run `metrics.py` to obtain statistical indicators:
+Calculate metrics for the specific mode:
 ```bash
-python metrics.py
+# Example
+python eval_metrics.py --config config/main_config_skab.yaml --mode no_residual
 ```
 
 ## 4. Different Scaling Factors
 
-**Step 1: Modify Configuration**
+**Step 1: Run Automation Script**
 
-Open config.py and adjust the settings by multiplying the following parameters by the corresponding scaling factor:
-EU1,EU2,MI1,MI2
+Run the sensitivity analysis tools. These scripts automatically scale parameters from 0.25x to 2.00x, perform inference, and calculate metrics.
 
-**Step 2: Run Main Script**
-
-Run `main.py` to generate the results:
 ```bash
-python main.py
+# For SKAB
+python tools/run_sensitivity_skab.py
+
+# For ATSADBench
+python tools/run_sensitivity_atsad.py
 ```
 
-**Step 3: Get Metrics**
+**Step 2: Check Results**
 
-Run `metrics.py` to obtain statistical indicators:
-```bash
-python metrics.py
-```
+The summary reports will be saved directly to:
+   results_skab/sensitivity/FINAL_SUMMARY_SKAB.xlsx
+   results_atsad/sensitivity/FINAL_SUMMARY.xlsx

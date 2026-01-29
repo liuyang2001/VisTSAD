@@ -1,0 +1,27 @@
+project:
+  name: "ATSAD_Anomaly_Detection"
+
+experiment:
+  mode: "all" # all, eu_only, mi_only, value_only, no_residual
+  window_size: 32
+  stride: 32
+  num_vars: 27
+  
+  target_files: 
+    - "M_IL_CDA_test_data.xlsx"
+    - "M_IL_FVA_test_data.xlsx"
+    - "M_IL_TVDA_test_data.xlsx"
+    - "M_OL_CDA_test_data.xlsx"
+    - "M_OL_FVA_test_data.xlsx"
+    - "M_OL_TVDA_test_data.xlsx"
+
+paths:
+  dataset: "dataset" 
+  resources: "data/resources_atsad/train_ref_lib.pkl" 
+  dataset_params: "config/atsad/dataset_params_all.json" 
+  output_dir: "results_atsad" 
+
+model:
+  api_key: ""
+  base_url: "https://generativelanguage.googleapis.com/v1beta/openai/"
+  model_name: "gemini-3-pro-preview"
