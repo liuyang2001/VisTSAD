@@ -12,6 +12,8 @@
 └── requirements.txt
 ```
 
+All supplementary materials are included in the appendix.pdf
+
 ## 1. Setup and Preparation
 
 **Step 1: Install Dependencies**
